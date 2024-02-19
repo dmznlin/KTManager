@@ -6,26 +6,37 @@
 package main
 
 import (
-	"github.com/dmznlin/znlib-go/znlib"
-	"ktmanager/ktCommon"
+	"flag"
+	"fmt"
+	. "github.com/dmznlin/znlib-go/znlib"
 )
 
-// 初始化znlib-go基础库
-var _ = znlib.InitLib(nil, nil)
+// 初始化lib基础库
+var _ = InitLib(nil, nil)
 
 func main() {
-	err := znlib.Mqtt.Start(onMqttMessge)
-	if err != nil {
-		znlib.Error("启动mqtt服务失败.", znlib.LogFields{"err": err})
+	var pass string
+	flag.StringVar(&pass, "pass", "", "生成DB、MQTT的DES密码")
+	flag.Parse()
+
+	if pass != "" {
+		buf, err := NewEncrypter(EncryptDES_ECB,
+			[]byte(DefaultEncryptKey)).Encrypt([]byte(pass), true)
+		if err == nil {
+			fmt.Println(string(buf))
+		} else {
+			Error(err)
+		}
+
 		return
 	}
 
-	znlib.Info("连接云管家获取运行参数...")
-	mc := common.NewMqttCommand()
-	znlib.Info(mc)
+	//  ---------------------------------------------------------------------------
+	Mqtt.StartWithUtils(eventOnMQTT)
+	//启动mqtt
 
-	znlib.WaitSystemExit(func() error {
-		znlib.Mqtt.Stop()
+	WaitSystemExit(func() error {
+		Mqtt.Stop()
 		return nil
 	})
 }

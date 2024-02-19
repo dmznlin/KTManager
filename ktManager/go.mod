@@ -1,15 +1,16 @@
-module ktmanager
+module manager
 
-go 1.21.5
+go 1.20
 
 require (
-	github.com/dmznlin/znlib-go v0.0.3-0.20240114072941-33b03337311b
-	github.com/eclipse/paho.mqtt.golang v1.4.3
+	github.com/dmznlin/znlib-go v0.0.3-0.20240117013611-4b797c4b08f5
+	github.com/olahol/melody v1.1.4
 )
 
 require (
 	github.com/cespare/xxhash/v2 v2.1.2 // indirect
 	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
+	github.com/eclipse/paho.mqtt.golang v1.4.3 // indirect
 	github.com/forgoer/openssl v1.2.1 // indirect
 	github.com/go-ini/ini v1.66.4 // indirect
 	github.com/go-redis/redis/v8 v8.11.5 // indirect
@@ -27,5 +28,4 @@ require (
 	golang.org/x/net v0.8.0 // indirect
 	golang.org/x/sync v0.1.0 // indirect
 	golang.org/x/sys v0.6.0 // indirect
-	gopkg.in/yaml.v3 v3.0.1 // indirect
 )

@@ -1,0 +1,7 @@
+go 1.20
+
+use ktMonitor
+
+use ktCommon
+
+use ktManager
